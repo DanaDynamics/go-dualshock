@@ -66,6 +66,9 @@ type State struct {
 // transform reads a slice of bytes and turns them into a valid state for the
 // controller
 func transform(b []byte) State {
+	if len(b) < 43 {
+		return State{}
+	}
 	return State{
 		L1:       (b[6] & 0x01) != 0,
 		L2:       (b[6] & 0x04) != 0,
